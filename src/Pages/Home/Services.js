@@ -45,7 +45,7 @@ const Services = () => {
                 }
 
             </div>
-            <div class="hero py-24 ">
+            <div class="hero lg:py-24 md:pt-20 sm:pt-10 pt-5">
                 <div class="hero-content flex-col lg:flex-row">
                     <img style={{width:'100%'}} src={img} class="max-w-lg rounded-lg shadow-2xl" alt=''/>
                     <div className='lg:pl-20'>
