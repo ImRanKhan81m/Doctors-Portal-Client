@@ -5,6 +5,7 @@ module.exports = {
   },
   daisyui: {
     themes: [
+      
       {
         doctortheme: {
           primary: "#0FCFEC",
