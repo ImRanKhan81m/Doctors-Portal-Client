@@ -1,16 +1,29 @@
-import React from 'react';
 
-const AppointmentBanner = () => {
+import chair from '../../assets/images/chair.png'
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import bgImage from '../../assets/images/bg.png'
+
+const AppointmentBanner = ({date, setDate}) => {
+   
+
     return (
-        <div class="hero min-h-screen bg-base-200">
-            <div class="hero-content flex-col lg:flex-row-reverse">
-                <img src="https://api.lorem.space/image/movie?w=260&h=400" class="max-w-sm rounded-lg shadow-2xl" alt='' />
-                <div>
-                    <h1 class="text-5xl font-bold">Box Office News!</h1>
-                    <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                    <button class="btn btn-primary">Get Started</button>
+        <div
+            style={{
+                background: `url(${bgImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+            }}
+            class="hero lg:py-10 md:py-5 sm:py-5 lg:px-8 md:px-8 sm:px-7 px-0 mb-10">
+            <div style={{ maxWidth: '85rem' }} class="hero-content  flex-col lg:flex-row-reverse ">
+                <img style={{ width: '100%' }} src={chair} class="lg:max-w-lg  rounded-lg shadow-2xl  lg:mr-3" alt='Dentist chair' />
+                <div className='lg:px-16'>
+                    <DayPicker className=' shadow-lg px-8 py-7 my-5'
+                         mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                    />
                 </div>
             </div>
+
         </div>
     );
 };
