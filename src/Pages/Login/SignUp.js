@@ -1,19 +1,20 @@
 import React from 'react';
 import auth from '../../firebase.init';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword , useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate()
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+      ] = useCreateUserWithEmailAndPassword(auth);
 
     if (loading || gLoading) {
         return <Loading/>
@@ -24,22 +25,42 @@ const Login = () => {
     }
 
     if (user || gUser) {
-        console.log(user || gUser);
+        // console.log(user || gUser);
+        navigate('/')
     }
 
     const onSubmit = data => {
         console.log(data);
-        signInWithEmailAndPassword(data.email, data.password)
+        createUserWithEmailAndPassword(data.email, data.password);
     }
-
 
 
     return (
         <div className='mid-content flex justify-center items-center lg:px-8 md:px-8 sm:px-7 px-4 lg:pt-24 md:pt-20 sm:pt-16 pt-10'>
             <div className="border card lg:w-3/6 md:w-4/6 sm:w-full w-full bg-base-100 shadow-xl">
                 <div className="card-body text-center">
-                    <h2 className="text-center text-2xl font-bold">Login</h2>
+                    <h2 className="text-center text-2xl font-bold">Sign Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Enter Your Name"
+                                className="input input-bordered focus:outline-none"
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: 'Name is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                            </label>
+                        </div>
 
                         <div className="form-control ">
                             <label className="label">
@@ -47,7 +68,7 @@ const Login = () => {
                             </label>
                             <input
                                 type="email"
-                                placeholder="Your Email"
+                                placeholder="Enter Your Email"
                                 className="input input-bordered focus:outline-none"
                                 {...register("email", {
                                     required: {
@@ -90,9 +111,9 @@ const Login = () => {
                             </label>
                         </div>
                         {signInError}
-                        <input className='btn w-full text-white ' type="submit" value="LOGIN" />
+                        <input className='btn w-full text-white ' type="submit" value="SIGN UP" />
                     </form>
-                    <p className='py-3 '>New to Doctors Portal? <Link  to="/signup" ><span className=' text-secondary link'>Create New Account</span></Link></p>
+                    <p className='py-3 '>Already have an account? <Link to="/login" ><span className=' text-secondary link'>Please Login</span></Link></p>
                     <div className='divider '>OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
@@ -103,4 +124,4 @@ const Login = () => {
     );
 };
 
-export default Login; 
+export default SignUp;
