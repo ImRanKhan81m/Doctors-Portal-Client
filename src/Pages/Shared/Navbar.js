@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
     return (
-        <header className='sticky top-0 z-10 py-1 bg-base-100 shadow-sm lg:px-8 md:px-8 sm:px-7 px-0'>
+        <header className='sticky top-0 z-10 py-1 bg-base-100 shadow-sm lg:px-1 md:px-0 sm:px-0 px-0'>
             <div className="navbar mid-content ">
                 <div className="navbar-start">
                     <div className="dropdown">
