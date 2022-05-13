@@ -22,7 +22,7 @@ const AvailableAppointment = ({ date }) => {
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5  mt-20 px-3 lg:px-0 md:px-0 sm:px-0 lg:mb-20 md:mb-5'>
                 {
                     services.map(service => <AppointmentService
-                        key={services._id}
+                        key={service._id}
                         service={service}
                         setTreatment={setTreatment}
                     ></AppointmentService>)
