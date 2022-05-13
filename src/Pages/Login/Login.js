@@ -3,7 +3,7 @@ import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -15,16 +15,23 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
+
     if (loading || gLoading) {
-        return <Loading/>
+        return <Loading />
     }
+    
     let signInError;
     if (error || gError) {
         signInError = <p className='text-red-500 py-3'>{error?.message || gError?.message}</p>
     }
 
     if (user || gUser) {
-        console.log(user || gUser);
+        // console.log(user || gUser);
+        navigate(from, { replace: true });
     }
 
     const onSubmit = data => {
@@ -92,7 +99,7 @@ const Login = () => {
                         {signInError}
                         <input className='btn w-full text-white ' type="submit" value="LOGIN" />
                     </form>
-                    <p className='py-3 '>New to Doctors Portal? <Link  to="/signup" ><span className=' text-secondary link'>Create New Account</span></Link></p>
+                    <p className='py-3 '>New to Doctors Portal? <Link to="/signup" ><span className=' text-secondary link'>Create New Account</span></Link></p>
                     <div className='divider '>OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
