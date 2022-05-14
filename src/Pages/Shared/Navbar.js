@@ -16,9 +16,12 @@ const Navbar = () => {
         <li><NavLink to="/review">Review</NavLink></li>
         <li><NavLink to="/contact">Contact</NavLink></li>
         <li><NavLink to="/about">About</NavLink></li>
-        <li>{user ? <button onClick={logout} className='btn btn-ghost'>Sign Out</button> : <NavLink to="/login">Login</NavLink>}</li>
+        {
+            user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+        }
+        <li>{user ? <NavLink onClick={logout} to="/login">SignOut</NavLink> : <NavLink to="/login">Login</NavLink>}</li>
     </>
-    
+
 
     return (
         <header className='sticky top-0 z-10 py-1 bg-base-100 shadow-sm lg:px-1 md:px-0 sm:px-0 px-0'>
