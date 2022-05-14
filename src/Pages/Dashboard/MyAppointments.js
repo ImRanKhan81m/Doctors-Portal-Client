@@ -17,9 +17,9 @@ const MyAppointments = () => {
 
     return (
         <div>
-            <h2>My Appointments: {appointments.length}</h2>
+            <h2 className='text-xl '>My Appointments: {appointments.length}</h2>
             <div class="overflow-x-auto">
-                <table class="table w-full ">
+                <table class="table w-full mt-5">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
@@ -32,8 +32,8 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments.map(a => <tr className='hover'>
-                                <th>1</th>
+                            appointments.map((a, index) => <tr className='hover'>
+                                <th>{++index}</th>
                                 <td>{a.patientName}</td>
                                 <td>{a.date}</td>
                                 <td>{a.slot}</td>
