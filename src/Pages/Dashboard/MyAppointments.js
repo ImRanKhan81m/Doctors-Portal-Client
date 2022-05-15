@@ -32,14 +32,14 @@ const MyAppointments = () => {
                     setAppointments(data)
                 })
         }
-    }, [user])
+    }, [user, navigate])
 
 
     return (
         <div>
-            <h2 className='text-xl '>My Appointments: {appointments.length}</h2>
+            <h2 className='text-xl py-3'>My Appointments: {appointments.length}</h2>
             <div class="overflow-x-auto">
-                <table class="table w-full mt-5">
+                <table class="table w-full ">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
