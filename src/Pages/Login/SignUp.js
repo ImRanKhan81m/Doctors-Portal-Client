@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
@@ -20,23 +20,28 @@ const SignUp = () => {
 
     const [token] = useToken(user || gUser)
 
+    useEffect(() => {
+        if (token) {
+            // console.log(user || gUser);
+            navigate('/')
+        }
+    }, [token, navigate])
 
     if (loading || gLoading || updating) {
         return <Loading />
     }
+
     let signInError;
     if (error || gError || updateError) {
         signInError = <p className='text-red-500 py-3'>{error?.message || gError?.message || updateError?.message}</p>
     }
 
-    if (token) {
-        // console.log(user || gUser);
-        navigate('/')
-    }
+    
+
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
-        await updateProfile({displayName: data.name});
+        await updateProfile({ displayName: data.name });
     }
 
 
@@ -96,6 +101,7 @@ const SignUp = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
+                                autoComplete='on'
                                 type="password"
                                 placeholder="Password"
                                 className="input input-bordered focus:outline-none"

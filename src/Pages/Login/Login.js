@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -14,6 +15,7 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user || gUser)
 
     let navigate = useNavigate();
     let location = useLocation();
@@ -21,11 +23,11 @@ const Login = () => {
 
 
     useEffect(() => {
-        if (user || gUser) {
+        if (token) {
             // console.log(user || gUser);
             navigate(from, { replace: true });
         }
-    }, [user, gUser, from, navigate])
+    }, [token, from, navigate])
 
     if (loading || gLoading) {
         return <Loading />
@@ -35,7 +37,6 @@ const Login = () => {
     if (error || gError) {
         signInError = <p className='text-red-500 py-3'>{error?.message || gError?.message}</p>
     }
-
 
 
     const onSubmit = data => {
@@ -80,6 +81,7 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input
+                                autoComplete='on'
                                 type="password"
                                 placeholder="Password"
                                 className="input input-bordered focus:outline-none"
