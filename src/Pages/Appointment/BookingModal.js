@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
     const { _id, name, slots } = treatment;
     const [user] = useAuthState(auth);
-    const formattedDate = format(date,'PP');
+    const formattedDate = format(date, 'PP');
 
     const handleBooking = event => {
         event.preventDefault();
@@ -16,14 +16,14 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
         const booking = {
             treatmentId: _id,
             treatment: name,
-            date:formattedDate,
+            date: formattedDate,
             slot,
             patient: user.email,
             patientName: user.displayName,
             phone: event.target.phone.value
         }
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://agile-harbor-38425.herokuapp.com/booking', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -33,7 +33,6 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             .then(res => res.json())
             .then(data => {
                 // to close the modal
-                console.log(data);
                 if (data.success) {
                     toast(`Appointment is set, ${formattedDate} at ${slot}`)
 

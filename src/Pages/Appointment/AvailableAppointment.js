@@ -10,7 +10,7 @@ const AvailableAppointment = ({ date }) => {
 
     const formattedDate = format(date, 'PP');
 
-    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`https://agile-harbor-38425.herokuapp.com/available?date=${formattedDate}`)
         .then(res => res.json()))
     if (isLoading) {
         return <Loading />
