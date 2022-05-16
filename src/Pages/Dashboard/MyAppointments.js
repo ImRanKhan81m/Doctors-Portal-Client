@@ -18,7 +18,6 @@ const MyAppointments = () => {
                 }
             })
                 .then(res => {
-                    console.log('res', res);
                     if (res.status === 401 || res.status === 403) {
                         signOut(auth);
                         localStorage.removeItem('accessToken')
@@ -52,7 +51,7 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments?.map((a, index) => <tr className='hover'>
+                            appointments?.map((a, index) => <tr key={a._id} className='hover'>
                                 <th>{++index}</th>
                                 <td>{a.patientName}</td>
                                 <td>{a.date}</td>
