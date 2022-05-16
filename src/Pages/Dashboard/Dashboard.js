@@ -8,15 +8,15 @@ const Dashboard = () => {
     const [user] = useAuthState(auth)
     const [admin] = useAdmin(user);
     return (
-        <div class="drawer drawer-mobile mid-content static">
-            <input id="dashboard-sidebar" type="checkbox" class="drawer-toggle " />
-            <div class=" drawer-content lg:px-8 md:px-8 sm:px-7 px-4 pt-5">
+        <div className="drawer drawer-mobile mid-content static">
+            <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle " />
+            <div className=" drawer-content lg:px-8 md:px-8 sm:px-7 px-4 pt-5">
                 <h2 className='text-2xl font-bold text-secondary'>Welcome to your Dashboard</h2>
                 <Outlet></Outlet>
             </div>
-            <div class="drawer-side sticky z-1 ">
-                <label htmlFor="dashboard-sidebar" class="drawer-overlay"></label>
-                <ul class="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
+            <div className="drawer-side sticky z-1 ">
+                <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
+                <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
                     {/* <!-- Sidebar content here --> */}
                     <li><Link to="/dashboard">My Appointments</Link></li>
                     <li><Link to={"/dashboard/review"}>My Reviews</Link></li>
