@@ -19,6 +19,8 @@ import RequireAdmin from './Pages/Login/RequireAdmin';
 import NotFound from './Pages/NotFoundPage/NotFound';
 import AddDoctor from './Pages/Dashboard/AddDoctor';
 import ManageDoctors from './Pages/Dashboard/ManageDoctors';
+import Contact from './Pages/Home/Contact';
+import Testimonials from './Pages/Home/Testimonials';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />} />
+        <Route path='/reviews' element={<Testimonials />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/appointment' element={
