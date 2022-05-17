@@ -9,7 +9,7 @@ const Users = () => {
         fetch('https://agile-harbor-38425.herokuapp.com/user', {
             method: 'GET',
             headers: {
-                authorization: `Beared ${localStorage.getItem('accessToken')}`
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         }).then(res => res.json())
     )
