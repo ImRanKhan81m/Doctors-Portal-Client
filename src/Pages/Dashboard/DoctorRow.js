@@ -24,7 +24,6 @@ const DoctorRow = ({ doctor, index, refetch }) => {
                     }
                 })
         }
-
     }
 
     return (
