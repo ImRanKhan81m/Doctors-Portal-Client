@@ -1,10 +1,7 @@
 
 import './App.css';
 import Navbar from './Pages/Shared/Navbar';
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route, } from "react-router-dom";
 import Home from './Pages/Home/Home';
 import About from './Pages/About/About';
 import Login from './Pages/Login/Login';
@@ -20,6 +17,7 @@ import MyHistory from './Pages/Dashboard/MyHistory';
 import Users from './Pages/Dashboard/Users';
 import RequireAdmin from './Pages/Login/RequireAdmin';
 import NotFound from './Pages/NotFoundPage/NotFound';
+import AddDoctor from './Pages/Dashboard/AddDoctor';
 
 function App() {
   return (
@@ -37,14 +35,15 @@ function App() {
           </RequireAuth>
         } />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} >
-          <Route index element={<MyAppointments/>} ></Route>
-          <Route path='review' element={<MyReview/>} ></Route>
-          <Route path='history' element={<MyHistory/>} ></Route>
-          <Route path='users' element={<RequireAdmin><Users/></RequireAdmin>} ></Route>
+          <Route index element={<MyAppointments />} ></Route>
+          <Route path='review' element={<MyReview />} ></Route>
+          <Route path='history' element={<MyHistory />} ></Route>
+          <Route path='users' element={<RequireAdmin><Users /></RequireAdmin>} ></Route>
+          <Route path='addDoctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} ></Route>
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 }
