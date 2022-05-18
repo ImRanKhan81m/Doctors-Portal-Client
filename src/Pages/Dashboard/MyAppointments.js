@@ -42,13 +42,13 @@ const MyAppointments = () => {
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Treatment</th>
-                            <th>Transaction Id</th>
-                            <th>Payment</th>
+                            <th>#</th>
+                            <th className='text-center'>Name</th>
+                            <th className='text-center'>Date</th>
+                            <th className='text-center'>Time</th>
+                            <th className='text-center'>Treatment</th>
+                            <th className='text-center'>Transaction Id</th>
+                            <th className='text-center'>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,12 +62,10 @@ const MyAppointments = () => {
 
                                 <td>{(a.price && a.transactionId) && <p><span className='text-success font-bold'>{a.transactionId}</span></p>} </td>
 
-                                {(a.price && !a.transactionId) && <td> <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-sm btn-success'>Pay Now</button></Link> </td>}
+                                {(a.price && !a.paid) && <td> <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-sm btn-success'>Pay Now</button></Link> </td>}
 
                             
-                                <td>{(a.price && a.transactionId) && <button className='btn btn-sm btn-success'>Paid </button>} </td>
-
-
+                                <td>{(a.price && a.paid) && <button className='btn btn-sm btn-success'>Paid </button>}  </td>
                             </tr>)
                         }
                     </tbody>
