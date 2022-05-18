@@ -11,7 +11,7 @@ const MyAppointments = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`https://agile-harbor-38425.herokuapp.com/booking?patient=${user.email}`, {
+            fetch(`http://localhost:5000/booking?patient=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -47,6 +47,7 @@ const MyAppointments = () => {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
+                            <th>Transaction Id</th>
                             <th>Payment</th>
                         </tr>
                     </thead>
@@ -59,9 +60,14 @@ const MyAppointments = () => {
                                 <td>{a.slot}</td>
                                 <td>{a.treatment}</td>
 
-                                <td>{(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-sm btn-success'>Pay Now</button></Link>}</td>
+                                <td>{(a.price && a.transactionId) && <p><span className='text-success font-bold'>{a.transactionId}</span></p>} </td>
 
-                                <td>{(a.price && a.paid) && <span className='text-success'>Paid</span>}</td>
+                                {(a.price && !a.transactionId) && <td> <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-sm btn-success'>Pay Now</button></Link> </td>}
+
+                            
+                                <td>{(a.price && a.transactionId) && <button className='btn btn-sm btn-success'>Paid </button>} </td>
+
+
                             </tr>)
                         }
                     </tbody>

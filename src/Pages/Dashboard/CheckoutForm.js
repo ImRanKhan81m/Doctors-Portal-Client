@@ -7,8 +7,10 @@ const CheckoutForm = ({ appointment }) => {
     const elements = useElements();
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
-    const { price, patient, patientName } = appointment;
+    const { _id, price, patient, patientName } = appointment;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -36,7 +38,7 @@ const CheckoutForm = ({ appointment }) => {
             return
         }
         const card = elements.getElement(CardElement);
-        if (card == null) {
+        if (card === null) {
             return;
         }
 
@@ -47,6 +49,7 @@ const CheckoutForm = ({ appointment }) => {
 
         setCardError(error?.message || '')
         setSuccess('')
+        setProcessing(true)
         // confirm card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -61,12 +64,34 @@ const CheckoutForm = ({ appointment }) => {
             },
         );
         if (intentError) {
-            setCardError(intentError.message);
+            setCardError(intentError?.message);
+            setProcessing(false)
 
         } else {
             setCardError('');
+            setTransactionId(paymentIntent.id)
             console.log(paymentIntent);
             setSuccess('Congrats! Your payment is completed.')
+
+            // STORE PAYMENT ON DATABASE
+            const payment={
+                appointment: _id,
+                transactionId: paymentIntent.id
+
+            }
+            fetch(`http://localhost:5000/booking/${_id}`,{
+                method:'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            })
+            .then(res=> res.json())
+            .then(data=> {
+                setProcessing(false)
+                console.log(data);
+            })
         }
     }
 
@@ -97,10 +122,13 @@ const CheckoutForm = ({ appointment }) => {
                 cardError && <p className='text-red-500'>{cardError}</p>
             }
             {
-                success && <p className='text-green-500'>{success}</p>
+                success && <div className='text-green-500'>
+                    <p>{success}</p>
+                    <p>Your Transaction Id : <span className='text-orange-500 font-bold'>{transactionId}</span></p>
+                </div>
             }
         </>
     );
 };
 
-export default CheckoutForm;
+ export default CheckoutForm;
