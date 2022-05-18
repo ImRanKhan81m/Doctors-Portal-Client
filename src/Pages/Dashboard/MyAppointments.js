@@ -11,7 +11,7 @@ const MyAppointments = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`https://agile-harbor-38425.herokuapp.com?patient=${user.email}`, {
+            fetch(`https://agile-harbor-38425.herokuapp.com/booking?patient=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -27,7 +27,6 @@ const MyAppointments = () => {
                     return res.json()
                 })
                 .then(data => {
-
                     setAppointments(data)
                 })
         }
