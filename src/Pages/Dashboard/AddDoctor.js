@@ -8,7 +8,7 @@ const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const { data: services, isLoading } = useQuery('services', () =>
-        fetch('http://localhost:5000/service')
+        fetch('https://agile-harbor-38425.herokuapp.com/service')
             .then(res => res.json()
             ))
 
@@ -45,23 +45,23 @@ const AddDoctor = () => {
                         image: img
                     }
                     // send to your database
-                    fetch('http://localhost:5000/doctor',{
+                    fetch('https://agile-harbor-38425.herokuapp.com/doctor', {
                         method: 'POST',
-                        headers:{
+                        headers: {
                             'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(doctor)
                     })
-                    .then(res=>res.json())
-                    .then(inserted=>{
-                        if(inserted.insertedId){
-                            toast.success('Doctor added successfully')
-                            reset()
-                        }else{
-                            toast.error('Failed to the add Doctor')
-                        }
-                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                toast.success('Doctor added successfully')
+                                reset()
+                            } else {
+                                toast.error('Failed to the add Doctor')
+                            }
+                        })
                 }
             })
     }

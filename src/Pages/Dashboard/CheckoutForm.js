@@ -74,24 +74,24 @@ const CheckoutForm = ({ appointment }) => {
             setSuccess('Congrats! Your payment is completed.')
 
             // STORE PAYMENT ON DATABASE
-            const payment={
+            const payment = {
                 appointment: _id,
                 transactionId: paymentIntent.id
 
             }
-            fetch(`http://localhost:5000/booking/${_id}`,{
-                method:'PATCH',
+            fetch(`https://agile-harbor-38425.herokuapp.com/booking/${_id}`, {
+                method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(payment)
             })
-            .then(res=> res.json())
-            .then(data=> {
-                setProcessing(false)
-                console.log(data);
-            })
+                .then(res => res.json())
+                .then(data => {
+                    setProcessing(false)
+                    console.log(data);
+                })
         }
     }
 
@@ -131,4 +131,4 @@ const CheckoutForm = ({ appointment }) => {
     );
 };
 
- export default CheckoutForm;
+export default CheckoutForm;

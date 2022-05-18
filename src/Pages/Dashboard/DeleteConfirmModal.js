@@ -5,7 +5,7 @@ const DeleteConfirmModal = ({ deletingDoctor, refetch, setDeletingDoctor }) => {
     const { name, email } = deletingDoctor;
 
     const handleDelete = () => {
-        fetch(`http://localhost:5000/doctor/${email}`, {
+        fetch(`https://agile-harbor-38425.herokuapp.com/doctor/${email}`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -31,7 +31,7 @@ const DeleteConfirmModal = ({ deletingDoctor, refetch, setDeletingDoctor }) => {
                     <h3 class="font-bold text-lg text-red-500">Are you sure you want to delete {name}?</h3>
                     <p class="py-4">This will be permanently deleted. Continue?</p>
                     <div class="modal-action">
-                         <label for="delete-confirm-modal" class="btn ">Cancel</label>
+                        <label for="delete-confirm-modal" class="btn ">Cancel</label>
                         <button onClick={() => handleDelete()} className="btn btn-md btn-error text-white">Delete</button>
                     </div>
                 </div>
