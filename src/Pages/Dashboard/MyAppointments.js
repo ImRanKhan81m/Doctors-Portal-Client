@@ -37,7 +37,7 @@ const MyAppointments = () => {
         <div>
             <h2 className='text-xl py-3'>My Appointments: {appointments.length}</h2>
             <div className="overflow-x-auto ">
-                <table className="table  w-full ">
+                <table className="table  w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
@@ -52,7 +52,7 @@ const MyAppointments = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments?.map((a, index) => <tr key={a._id} className='hover'>
+                            appointments?.map((a, index) => <tr key={a._id} className='hover '>
                                 <th>{++index}</th>
                                 <td>{a.patientName}</td>
                                 <td>{a.date}</td>

@@ -21,8 +21,8 @@ const ManageDoctors = () => {
     return (
         <div>
             <h2 className='text-2xl py-3'>Manage Doctors: {doctors?.length}</h2>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
+            <div className="overflow-x-auto ">
+                <table className="table w-full ">
                     <thead>
                         <tr>
                             <th></th>
