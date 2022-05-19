@@ -22,6 +22,7 @@ import ManageDoctors from './Pages/Dashboard/ManageDoctors';
 import Contact from './Pages/Home/Contact';
 import Testimonials from './Pages/Home/Testimonials';
 import Payment from './Pages/Dashboard/Payment';
+import Footer from './Pages/Shared/Footer';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer/>
       <ToastContainer />
     </div>
   );

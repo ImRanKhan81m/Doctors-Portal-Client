@@ -16,7 +16,7 @@ const Navbar = () => {
         <li><NavLink to="/appointment">Appointment</NavLink></li>
         <li><NavLink to="/reviews">Review</NavLink></li>
         <li><NavLink to="/contact">Contact</NavLink></li>
-        <li><NavLink to="/about">About</NavLink></li>
+        {/* <li><NavLink to="/about">About</NavLink></li> */}
         {
             user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>
         }
@@ -38,7 +38,7 @@ const Navbar = () => {
                     </div>
                     <Link to={'/'} className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
                 </div>
-                <div className="navbar-end hidden lg:flex">
+                <div className="navbar-end hidden lg:flex ">
                     <ul className="menu menu-horizontal p-0">
                         {menuItems}
                     </ul>
